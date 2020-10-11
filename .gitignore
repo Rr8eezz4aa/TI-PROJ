@@ -1,1 +1,3 @@
-__pycache__
+__pycache__/
+projects_code.bin
+projects_informations.json
