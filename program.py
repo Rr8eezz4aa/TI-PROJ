@@ -7,17 +7,17 @@ import json
 def write_projects_code(informations):
     codes = [info['code'] for info in informations]
 
-    with open("projects_code.txt", 'wb') as f:
+    with open("projects_code.bin", 'wb') as f:
         pickle.dump(codes, f)
 
 # read project codes as a list from "project_codes.txt".
 def read_projects_code():
     codes = []
     try:
-        with open("projects_code.txt", 'rb') as f:
+        with open("projects_code.bin", 'rb') as f:
             codes = pickle.load(f)
-    except:
-        return codes
+    except FileNotFoundError:
+        pass
     return codes
 
 # remove dublicate projects and return only new projects.
@@ -46,10 +46,10 @@ def write_project_informations(informations):
 
 # read project informations from a json file.
 def read_project_informations():
-    with open("projects_informations.json", 'r', encoding="utf-8") as f:
-        try:
+    try:
+        with open("projects_informations.json", 'r', encoding="utf-8") as f:
             informations = json.load(f)
-        except json.JSONDecodeError:
+    except (json.JSONDecodeError, FileNotFoundError):
             informations = []
     return informations
 
